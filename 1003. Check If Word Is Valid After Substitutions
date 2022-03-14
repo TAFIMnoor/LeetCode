@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for(char c:s){
+            if( c != 'c')
+                st.push(c);
+            else{
+                string t = "";
+                if(st.size() > 1){
+                    t += st.top();  st.pop();
+                    t += st.top();  st.pop();
+                }
+                if(t != "ba")
+                    return false;
+            }
+        }
+        return st.empty();
+    }
+};
