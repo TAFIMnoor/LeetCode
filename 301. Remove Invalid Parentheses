@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int checkValid(string s){
+        stack<char> st;
+        for(char c: s){
+            if( c == '(')
+                st.push(c);
+            else if(c == ')'){
+                if(!st.empty() && st.top() == '(') st.pop();
+                else st.push(c);
+            }
+        }
+        return st.size();
+    }
+    void generateValid(string s, map<string,int>& mapp, vector<string>& ans, int extra){
+        if(mapp[s]) return;
+        else mapp[s]++;
+        
+        if(extra == 0){
+            if(checkValid(s) == 0)
+                ans.push_back(s);
+            return;
+        }
+        
+        for( int i = 0; i < s.size(); i++){
+            string first = s.substr(0,i);
+            string last = s.substr(i+1);
+            generateValid( (first+last), mapp, ans, extra-1 );
+        }      
+    }
+    vector<string> removeInvalidParentheses(string s) {
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+        int extra = checkValid(s);
+        map<string,int> mapp;
+        vector<string> ans;
+        generateValid(s,mapp,ans,extra);
+        return ans;
+    }
+};
