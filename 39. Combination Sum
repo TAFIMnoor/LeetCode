@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void generateComb(vector<int>& v, vector<int>& vect, int t, int index){
+        
+        if( t == 0 ){
+           ans.push_back(vect);
+           return;
+        }
+        for( int i = index ; i < v.size(); i++){
+            if(t-v[i]>=0){
+                vect.push_back(v[i]);
+                generateComb(v,vect,t-v[i],i);
+                vect.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> vect;
+        sort(candidates.begin(),candidates.end());
+        generateComb(candidates,vect,target,0);  
+        return ans;
+    }
+};
