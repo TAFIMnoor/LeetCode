@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        int ans = 0,push = 0;
+        for(int i = 0; i<s.size(); i++){
+            if( s[i] == '(')
+                push++;
+            else {
+                push--;
+                if(s[i-1] == '(')
+                    ans += 1<<push;
+            }
+        }
+        return ans;
+    }
+};
