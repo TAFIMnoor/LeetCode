@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+        int rotations = INT_MAX;
+        vector<int> top(7,0), bottom(7,0), equal(7,0);
+        
+        for(int i = 0; i < tops.size(); i++){
+            top[tops[i]]++;
+            bottom[bottoms[i]]++;
+            if( tops[i] == bottoms[i])
+                equal[tops[i]]++;
+        }
+        for(int i = 1; i <= 6; i++){
+            if ( top[i]+bottom[i]-equal[i] == tops.size() )
+                rotations = min(rotations, min(top[i],bottom[i]) - equal[i]);
+        }
+        if( rotations == INT_MAX ) rotations = -1;
+        return rotations;
+        
+    }
+};
