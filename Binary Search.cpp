@@ -10,9 +10,9 @@ public:
             if( nums[m] == t ) 
                 return m;
             if( nums[m] > t )
-                return binarySearch(nums, l, r-1, t);
+                return binarySearch(nums, l, m-1, t);
             if( nums[m] < t )
-                 return binarySearch(nums, l+1, r, t);
+                 return binarySearch(nums, m+1, r, t);
             
         }
         
@@ -36,9 +36,9 @@ public:
             if(nums[m] == target)
                 return m;
             if( nums[m] > target )
-                r--;
+                r = m - 1;
             if( nums[m] < target )
-                l++;
+                l = m + 1;
         }
         
         return -1;
