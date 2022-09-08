@@ -8,16 +8,16 @@ public:
         int n = graph.size()-1;
         
         while(!q.empty()){
-            auto cur = q.front();
+            vector<int> cur = q.front();
             q.pop();
-            auto next = graph[cur[cur.size()-1]];
-            for(int i = 0; i < next.size(); i++){
-                auto p = cur;
-                p.push_back(next[i]);
-                if(next[i] == n)
-                    path.push_back(p);
-                else
-                    q.push(p);
+            int next = cur[cur.size()-1];
+            if(next == n){
+                path.push_back(cur);
+            }
+            for(auto it:graph[next]){
+                cur.push_back(it);
+                q.push(cur);
+                cur.pop_back();
             }
         }
         
